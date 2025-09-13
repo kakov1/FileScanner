@@ -8,7 +8,6 @@ void failOpenFile(cFilePath &file) {
 }
 
 std::string computeMD5(cFilePath &file) {
-  const std::size_t bufferSize = 16 * 1024;
   unsigned char buffer[bufferSize];
   unsigned char md5Result[MD5_DIGEST_LENGTH];
 

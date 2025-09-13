@@ -4,8 +4,6 @@
 #include "details.hpp"
 
 namespace util {
-std::string computeMD5(cFilePath &file);
-
 class ThreadPool final {
 private:
   size_t threadCount_;

@@ -7,12 +7,11 @@ find_package(GTest REQUIRED)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 
 add_executable(scanner main.cpp)
 
 target_link_libraries(scanner
-    PRIVATE
+    PUBLIC
     scanner_lib
     Boost::program_options
 )
