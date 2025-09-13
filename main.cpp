@@ -46,7 +46,7 @@ int main(int argc, char *argv[]) {
     std::cerr << "Error parsing command line: " << ex.what() << "\n";
     return 1;
   } catch (const std::exception &ex) {
-    std::cerr << "Ошибка: " << ex.what() << "\n";
+    std::cerr << "Error: " << ex.what() << "\n";
     return 1;
   }
 

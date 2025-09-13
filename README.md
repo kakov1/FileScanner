@@ -40,13 +40,13 @@ cmake --build .
 Программа принимает три аргумента:
 
 ```bash
-./main --base <csv> --log <logfile> --path <directory>
+./scanner --base <csv> --log <logfile> --path <directory>
 ```
 
 ### Пример
 
 ```bash
-./main --base base.csv --log report.log --path ./files
+./scanner --base base.csv --log report.log --path ./files
 ```
 
 Где:
