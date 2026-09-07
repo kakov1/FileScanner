@@ -1,0 +1,51 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-22.04
+
+    strategy:
+      matrix:
+        compiler: [ g++-12, clang++-15 ]
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y cmake ninja-build python3
+        if [ "${{ matrix.compiler }}" = "g++-12" ]; then
+          sudo apt-get install -y g++-12
+        else
+          sudo apt-get install -y clang-15
+        fi
+
+    - name: Configure CMake
+      run: |
+        if [ "${{ matrix.compiler }}" = "g++-12" ]; then
+          export CXX=g++-12 CC=gcc-12
+        else
+          export CXX=clang++-15 CC=clang-15
+        fi
+        cmake -B build -G Ninja \
+          -DCMAKE_BUILD_TYPE=Release \
+          -DBUILD_TESTS=ON
+
+    - name: Build
+      run: cmake --build build
+
+    - name: Generate test files
+      run: python3 tests/generate_files.py
+
+    - name: Run Tests
+      run: |
+        cd build
+        ctest --output-on-failure
